@@ -11,9 +11,8 @@ define(function (require, exports, module) {
 
 	function htmlHinter(text, fullPath) {
 		var results;
-console.log('run htmlhinter');
 		results = HTMLHint.verify(text);
-console.dir(results);
+
 		if (results.length) {
 
 			var result = { errors: [] };

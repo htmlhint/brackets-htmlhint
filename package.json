@@ -3,7 +3,7 @@
     "title": "HTMLHint",
     "description": "Adds HTMLHint support to Brackets.",
     "homepage": "https://github.com/cfjedimaster/brackets-htmlhint",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Raymond Camden <raymondcamden@gmail.com> (http://www.raymondcamden.com)",
     "license": "MIT",
     "engines": {
