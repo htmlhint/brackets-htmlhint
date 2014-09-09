@@ -58,7 +58,7 @@ define(function (require, exports, module) {
     function _loadRules() {
         var result = new $.Deferred();
         
-        var projectRootEntry = ProjectManager.getProjectRoot(),
+        var projectRootEntry = ProjectManager.getProjectRoot();
             
         if (!projectRootEntry) {
             return result.resolve(undefined).promise();
@@ -76,7 +76,7 @@ define(function (require, exports, module) {
             try {
                 config = JSON.parse(content);
             } catch (e) {
-                console.error("HTMLHint: error parsing " + file.fullPath + ". Details: " + e);
+                //console.error("HTMLHint: error parsing " + file.fullPath + ". Details: " + e);
                 result.reject(e);
                 return;
             }
