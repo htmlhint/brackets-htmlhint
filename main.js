@@ -72,7 +72,11 @@ define(function (require, exports, module) {
             }
             
             var config;
-            
+            if(!content) {
+                result.resolve(undefined);
+                return;
+            }
+
             try {
                 config = JSON.parse(content);
             } catch (e) {
