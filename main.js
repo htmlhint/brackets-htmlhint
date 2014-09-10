@@ -66,7 +66,7 @@ define(function (require, exports, module) {
             
         var file = FileSystem.getFileForPath(projectRootEntry.fullPath + configFileName);
         file.read(function (err, content) {
-            if (!err) {
+            if (err) {
                 result.resolve(undefined);
                 return;
             }
