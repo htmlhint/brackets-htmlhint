@@ -12,10 +12,8 @@ define(function (require, exports, module) {
         
 	require("htmlhint/htmlhint");
 
-    var configFileName = ".htmlhintrc";
-    
-	function htmlHinter(text, fullPath) {
-        return _loadRules().then(function (rules) {
+    function _hinter(text, fullPath, configFileName) {
+        return _loadRules(configFileName).then(function (rules) {
             var results;
             
             results = HTMLHint.verify(text, rules);
@@ -55,7 +53,15 @@ define(function (require, exports, module) {
         });
 	}
 
-    function _loadRules() {
+    function htmlHinter(text, fullPath) {
+        return _hinter(text, fullPath, ".htmlhintrc");
+    }
+
+    function xmlHinter(text, fullPath) {
+        return _hinter(text, fullPath, ".xmlhintrc");
+    }
+
+    function _loadRules(configFileName) {
         var result = new $.Deferred();
         
         var projectRootEntry = ProjectManager.getProjectRoot();
@@ -99,5 +105,8 @@ define(function (require, exports, module) {
 		scanFileAsync: htmlHinter
 	});
 
-
+    CodeInspection.register("xml", {
+        name: "XMLHint",
+        scanFileAsync: xmlHinter
+    });
 });
