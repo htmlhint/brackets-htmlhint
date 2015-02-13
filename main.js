@@ -2,54 +2,53 @@
 /*global define, brackets, HTMLHint */
 
 define(function (require) {
-	"use strict";
+    "use strict";
 
     var FileSystem      = brackets.getModule("filesystem/FileSystem");
     var CodeInspection  = brackets.getModule("language/CodeInspection");
     var ProjectManager  = brackets.getModule("project/ProjectManager");
-        
-	require("htmlhint/htmlhint");
+
+    require("htmlhint/htmlhint");
 
     function _hinter(text, fullPath, configFileName) {
         return _loadRules(configFileName).then(function (rules) {
-            var results;
-            
-            results = HTMLHint.verify(text, rules);
-
+            var results = HTMLHint.verify(text, rules);
             if (results.length) {
+                var result = {
+                    errors: []
+                };
 
-                var result = { errors: [] };
-
-                for(var i=0, len=results.length; i<len; i++) {
-
+                for (var i = 0, len = results.length; i < len; i++) {
                     var messageOb = results[i];
-
-                    if(!messageOb.line) continue;
+                    if (!messageOb.line) {
+                        continue;
+                    }
                     //default
                     var type = CodeInspection.Type.WARNING;
 
-                    if(messageOb.type === "error") {
+                    if (messageOb.type === "error") {
                         type = CodeInspection.Type.ERROR;
-                    } else if(messageOb.type === "warning") {
+                    } else if (messageOb.type === "warning") {
                         type = CodeInspection.Type.WARNING;
                     }
 
                     result.errors.push({
-                        pos: {line:messageOb.line-1, ch:messageOb.col},
-                        message:messageOb.message,
-                        
-                        type:type
+                        pos: {
+                            line: messageOb.line - 1,
+                            ch: messageOb.col
+                        },
+                        message: messageOb.message,
+                        type: type
                     });
-                    
                 }
-                
+
                 return result;
             } else {
                 //no errors
                 return null;
             }
         });
-	}
+    }
 
     function htmlHinter(text, fullPath) {
         return _hinter(text, fullPath, ".htmlhintrc");
@@ -61,22 +60,21 @@ define(function (require) {
 
     function _loadRules(configFileName) {
         var result = new $.Deferred();
-        
+
         var projectRootEntry = ProjectManager.getProjectRoot();
-            
         if (!projectRootEntry) {
             return result.resolve(undefined).promise();
         }
-            
+
         var file = FileSystem.getFileForPath(projectRootEntry.fullPath + configFileName);
         file.read(function (err, content) {
             if (err) {
                 result.resolve(undefined);
                 return;
             }
-            
+
             var config;
-            if(!content) {
+            if (!content) {
                 result.resolve(undefined);
                 return;
             }
@@ -88,20 +86,20 @@ define(function (require) {
                 result.reject(e);
                 return;
             }
-            
+
             result.resolve(config);
         });
         return result.promise();
     }
-    
-	CodeInspection.register("html", {
-		name: "HTMLHint",
-		scanFileAsync: htmlHinter
-	});
-	CodeInspection.register("htm", {
-		name: "HTMLHint",
-		scanFileAsync: htmlHinter
-	});
+
+    CodeInspection.register("html", {
+        name: "HTMLHint",
+        scanFileAsync: htmlHinter
+    });
+    CodeInspection.register("htm", {
+        name: "HTMLHint",
+        scanFileAsync: htmlHinter
+    });
 
     CodeInspection.register("xml", {
         name: "XMLHint",
