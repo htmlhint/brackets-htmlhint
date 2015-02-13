@@ -3,13 +3,15 @@
     "title": "HTMLHint",
     "description": "Adds HTMLHint support to Brackets.",
     "homepage": "https://github.com/cfjedimaster/brackets-htmlhint",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "author": "Raymond Camden <raymondcamden@gmail.com> (http://www.raymondcamden.com)",
-    "contributors": [{
-        "name": "Diogo Gomes",
-        "email": "dgomes@graphnode.com"
-    }],
+    "contributors": [
+        "Diogo Gomes <dgomes@graphnode.com>",
+        "Jan Pilzer (https://github.com/Hirse)"
+    ],
     "license": "MIT",
+    "keywords": ["lint", "linting", "linter", "html", "xml"],
+    "categories": "linting",
     "engines": {
         "brackets": ">=0.33.0"
     }
