@@ -1,14 +1,12 @@
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
-/*global define, brackets, $, window, CSSLint, Mustache */
+/*global define, brackets, HTMLHint */
 
-define(function (require, exports, module) {
-	'use strict';
+define(function (require) {
+	"use strict";
 
-	var AppInit                 = brackets.getModule("utils/AppInit"),
-		CodeInspection			= brackets.getModule("language/CodeInspection"),
-        FileSystem              = brackets.getModule("filesystem/FileSystem"),
-        FileUtils               = brackets.getModule("file/FileUtils"),
-        ProjectManager          = brackets.getModule("project/ProjectManager");
+    var FileSystem      = brackets.getModule("filesystem/FileSystem");
+    var CodeInspection  = brackets.getModule("language/CodeInspection");
+    var ProjectManager  = brackets.getModule("project/ProjectManager");
         
 	require("htmlhint/htmlhint");
 
