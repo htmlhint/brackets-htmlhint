@@ -6,6 +6,7 @@ define(function (require) {
 
     var FileSystem      = brackets.getModule("filesystem/FileSystem");
     var CodeInspection  = brackets.getModule("language/CodeInspection");
+    var LanguageManager = brackets.getModule("language/LanguageManager");
     var ProjectManager  = brackets.getModule("project/ProjectManager");
 
     require("htmlhint/htmlhint");
@@ -105,4 +106,6 @@ define(function (require) {
         name: "XMLHint",
         scanFileAsync: xmlHinter
     });
+
+    LanguageManager.getLanguage("json").addFileName([".htmlhintrc", ".xmlhintrc"]);
 });
