@@ -27,11 +27,25 @@ define(function (require) {
     });
     xmlDefaults = xmlpm.get("options");
 
+    var csspm = PreferencesManager.getExtensionPrefs("csslint");
+    var cssDefaults;
+    csspm.on("change", function () {
+        cssDefaults = csspm.get("options");
+    });
+    cssDefaults = csspm.get("options");
+
+    var jspm = PreferencesManager.getExtensionPrefs("jshint");
+    var jsDefaults;
+    jspm.on("change", function () {
+        jsDefaults = jspm.get("options");
+    });
+    jsDefaults = jspm.get("options");
+
     require("htmlhint/htmlhint");
 
     function _hinter(text, fullPath, configFileName, defaults) {
         return _loadRules(configFileName).then(function (rules) {
-            var results = HTMLHint.verify(text, $.extend({}, defaults, rules));
+            var results = HTMLHint.verify(text, $.extend(true, {}, defaults, rules));
             if (results.length) {
                 var result = {
                     errors: []
@@ -70,7 +84,14 @@ define(function (require) {
     }
 
     function htmlHinter(text, fullPath) {
-        return _hinter(text, fullPath, ".htmlhintrc", htmlDefaults);
+        var defaults = htmlDefaults;
+        return _loadRules(".jshintrc").then(function (rules) {
+            defaults.jshint = $.extend(true, {}, jsDefaults||{}, rules);
+            return _loadRules(".csslintrc");
+        }).then(function (rules) {
+            defaults.csslint = $.extend(true, {}, cssDefaults||{}, rules);
+            return _hinter(text, fullPath, ".htmlhintrc", defaults);
+        });
     }
 
     function xmlHinter(text, fullPath) {
