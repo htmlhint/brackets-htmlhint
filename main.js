@@ -86,12 +86,20 @@ define(function (require) {
     function htmlHinter(text, fullPath) {
         var defaults = htmlDefaults;
         return _loadRules(".jshintrc").then(function (rules) {
-            defaults.jshint = $.extend(true, {}, jsDefaults||{}, rules);
-            if ($.isEmptyObject(defaults.jshint)) defaults.jshint = false;
+            if (!window.JSHINT) {
+                defaults.jshint = false;
+            } else {
+                defaults.jshint = $.extend(true, {}, jsDefaults||{}, rules);
+                if ($.isEmptyObject(defaults.jshint)) defaults.jshint = false;
+            }
             return _loadRules(".csslintrc");
         }).then(function (rules) {
-            defaults.csslint = $.extend(true, {}, cssDefaults||{}, rules);
-            if ($.isEmptyObject(defaults.csslint)) defaults.csslint = false;
+            if (!window.CSSLint) {
+                defaults.csslint = false;
+            } else {
+                defaults.csslint = $.extend(true, {}, cssDefaults||{}, rules);
+                if ($.isEmptyObject(defaults.csslint)) defaults.csslint = false;
+            }
             return _hinter(text, fullPath, ".htmlhintrc", defaults);
         });
     }
