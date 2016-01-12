@@ -87,9 +87,11 @@ define(function (require) {
         var defaults = htmlDefaults;
         return _loadRules(".jshintrc").then(function (rules) {
             defaults.jshint = $.extend(true, {}, jsDefaults||{}, rules);
+            if ($.isEmptyObject(defaults.jshint)) defaults.jshint = false;
             return _loadRules(".csslintrc");
         }).then(function (rules) {
             defaults.csslint = $.extend(true, {}, cssDefaults||{}, rules);
+            if ($.isEmptyObject(defaults.csslint)) defaults.csslint = false;
             return _hinter(text, fullPath, ".htmlhintrc", defaults);
         });
     }
