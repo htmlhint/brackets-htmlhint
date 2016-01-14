@@ -36,10 +36,19 @@ define(function (require) {
 
     var jspm = PreferencesManager.getExtensionPrefs("jshint");
     var jsDefaults;
-    jspm.on("change", function () {
+    function _loadJSDefaults() {
         jsDefaults = jspm.get("options");
+        if (jsDefaults) {
+            var globals = jspm.get("globals") || {};
+            jsDefaults.predef = Object.keys(globals).map(function(el) {
+                return globals[el] ? el : '-' + el;
+            });
+        }
+    }
+    jspm.on("change", function () {
+        _loadJSDefaults();
     });
-    jsDefaults = jspm.get("options");
+    _loadJSDefaults();
 
     require("htmlhint/htmlhint");
 
