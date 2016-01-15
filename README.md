@@ -10,6 +10,8 @@ Usage
 If you want to change the default rules place a `.htmlhintrc` and/or `.xmlhintrc` file at the project root.  
 Check the default ruleset [here](https://github.com/yaniswang/HTMLHint/wiki/Usage).
 
+Global default options are available under "Debug > Open Preferences File" by adding or modifying "htmlhint.options" and "xmlhint.options".
+It also uses "jshint.options" and "csslint.options" for script and style tags.
 
 Issues/Updates
 =====

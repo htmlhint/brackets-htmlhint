@@ -8,12 +8,53 @@ define(function (require) {
     var CodeInspection  = brackets.getModule("language/CodeInspection");
     var LanguageManager = brackets.getModule("language/LanguageManager");
     var ProjectManager  = brackets.getModule("project/ProjectManager");
+    var PreferencesManager = brackets.getModule("preferences/PreferencesManager");
+
+    var htmlpm = PreferencesManager.getExtensionPrefs("htmlhint");
+    var htmlDefaults;
+    htmlpm.definePreference("options", "object", {})
+        .on("change", function () {
+            htmlDefaults = htmlpm.get("options");
+        });
+    htmlDefaults = htmlpm.get("options");
+
+    var xmlpm = PreferencesManager.getExtensionPrefs("xmlhint");
+    var xmlDefaults;
+    xmlpm.definePreference("options", "object", {
+        "doctype-first": false
+    }).on("change", function () {
+        xmlDefaults = xmlpm.get("options");
+    });
+    xmlDefaults = xmlpm.get("options");
+
+    var csspm = PreferencesManager.getExtensionPrefs("csslint");
+    var cssDefaults;
+    csspm.on("change", function () {
+        cssDefaults = csspm.get("options");
+    });
+    cssDefaults = csspm.get("options");
+
+    var jspm = PreferencesManager.getExtensionPrefs("jshint");
+    var jsDefaults;
+    function _loadJSDefaults() {
+        jsDefaults = jspm.get("options");
+        if (jsDefaults) {
+            var globals = jspm.get("globals") || {};
+            jsDefaults.predef = Object.keys(globals).map(function(el) {
+                return globals[el] ? el : '-' + el;
+            });
+        }
+    }
+    jspm.on("change", function () {
+        _loadJSDefaults();
+    });
+    _loadJSDefaults();
 
     require("htmlhint/htmlhint");
 
-    function _hinter(text, fullPath, configFileName) {
+    function _hinter(text, fullPath, configFileName, defaults) {
         return _loadRules(configFileName).then(function (rules) {
-            var results = HTMLHint.verify(text, rules);
+            var results = HTMLHint.verify(text, $.extend(true, {}, defaults, rules));
             if (results.length) {
                 var result = {
                     errors: []
@@ -52,11 +93,28 @@ define(function (require) {
     }
 
     function htmlHinter(text, fullPath) {
-        return _hinter(text, fullPath, ".htmlhintrc");
+        var defaults = htmlDefaults;
+        return _loadRules(".jshintrc").then(function (rules) {
+            if (!window.JSHINT) {
+                defaults.jshint = false;
+            } else {
+                defaults.jshint = $.extend(true, {}, jsDefaults||{}, rules);
+                if ($.isEmptyObject(defaults.jshint)) defaults.jshint = false;
+            }
+            return _loadRules(".csslintrc");
+        }).then(function (rules) {
+            if (!window.CSSLint) {
+                defaults.csslint = false;
+            } else {
+                defaults.csslint = $.extend(true, {}, cssDefaults||{}, rules);
+                if ($.isEmptyObject(defaults.csslint)) defaults.csslint = false;
+            }
+            return _hinter(text, fullPath, ".htmlhintrc", defaults);
+        });
     }
 
     function xmlHinter(text, fullPath) {
-        return _hinter(text, fullPath, ".xmlhintrc");
+        return _hinter(text, fullPath, ".xmlhintrc", xmlDefaults);
     }
 
     function _loadRules(configFileName) {
