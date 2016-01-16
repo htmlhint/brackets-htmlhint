@@ -12,10 +12,21 @@ define(function (require) {
 
     var htmlpm = PreferencesManager.getExtensionPrefs("htmlhint");
     var htmlDefaults;
-    htmlpm.definePreference("options", "object", {})
-        .on("change", function () {
-            htmlDefaults = htmlpm.get("options");
-        });
+    var HTMLhintDefaultObject = {
+        "tagname-lowercase": true,
+        "attr-lowercase": true,
+        "attr-value-double-quotes": true,
+        "doctype-first": true,
+        "tag-pair": true,
+        "spec-char-escape": true,
+        "id-unique": true,
+        "src-not-empty": true,
+        "attr-no-duplication": true,
+        "title-require": true
+    };
+    htmlpm.definePreference("options", "object", HTMLhintDefaultObject).on("change", function () {
+        htmlDefaults = htmlpm.get("options");
+    });
     htmlDefaults = htmlpm.get("options");
 
     var xmlpm = PreferencesManager.getExtensionPrefs("xmlhint");
@@ -54,7 +65,7 @@ define(function (require) {
 
     function _hinter(text, fullPath, configFileName, defaults) {
         return _loadRules(configFileName).then(function (rules) {
-            var results = HTMLHint.verify(text, $.extend(true, {}, defaults, rules));
+            var results = HTMLHint.verify(text, $.extend(true, {}, HTMLhintDefaultObject, defaults, rules));
             if (results.length) {
                 var result = {
                     errors: []
