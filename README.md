@@ -15,6 +15,7 @@ It also uses "jshint.options" and "csslint.options" for script and style tags.
 
 Issues/Updates
 =====
+[01/03/2017] Updated htmlhint - by @mornir
 [01/16/2016] Big update by Peter Scheler to support passing
 csslint/jshint options along to htmlhint. This means code
 inside <style>/<script> blocks can be validated.
