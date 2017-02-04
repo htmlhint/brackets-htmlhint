@@ -73,6 +73,7 @@ define(function (require) {
 
                 for (var i = 0, len = results.length; i < len; i++) {
                     var messageOb = results[i];
+                    console.log(messageOb);
                     if (!messageOb.line) {
                         continue;
                     }
@@ -88,7 +89,7 @@ define(function (require) {
                     result.errors.push({
                         pos: {
                             line: messageOb.line - 1,
-                            ch: messageOb.col
+                            ch: messageOb.col - 1
                         },
                         message: messageOb.message,
                         type: type

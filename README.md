@@ -15,6 +15,7 @@ It also uses "jshint.options" and "csslint.options" for script and style tags.
 
 Issues/Updates
 =====
+[02/04/2017] Fixes a cursor placement issue
 [01/03/2017] Updated htmlhint - by @mornir
 [01/16/2016] Big update by Peter Scheler to support passing
 csslint/jshint options along to htmlhint. This means code
