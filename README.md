@@ -1,32 +1,43 @@
-brackets-htmlhint
-=================
+<h1 align="center">
+  <br>
+  Brackets HTMLHint
+  <br>
+</h1>
 
-A Brackets wrapper for the HTMLHint library (see credit below).  
-Provides Brackets Code Inspection for HTML and XML.
+<h4 align="center">A Brackets wrapper for HTMLHint</h4>
 
+<p align="center">
+  <a href="https://travis-ci.org/htmlhint/brackets-htmlhint">
+    <img src="https://img.shields.io/travis/htmlhint/brackets-htmlhint.svg" alt="Travis Build Status">
+  </a>
+  <a href="https://codecov.io/gh/htmlhint/brackets-htmlhint">
+    <img src="https://codecov.io/gh/htmlhintbrackets-htmlhint/branch/master/graph/badge.svg" alt="Codecov">
+  </a>
+  <a href="https://www.npmjs.com/package/brackets-htmlhint">
+    <img src="https://img.shields.io/npm/dm/brackets-htmlhint.svg" alt="NPM count">
+  </a>
+  <img src="https://badgen.net/badge/license/MIT/green" alt="MIT Licence" />
+  <a href="https://discord.gg/nJ6J9CP">
+    <img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat">
+  </a>
+  <a href="http://roadmap.htmlhint.io/roadmap">
+    <img src="https://img.shields.io/badge/check-our%20roadmap-EE503E.svg" alt="Chat">
+  </a>
+</p>
 
-Usage
-=====
+<p align="center">
+  <a href="#usage">How To Use</a> • <a href="/CONTRIBUTING.md">Contributing</a> • <a href="http://roadmap.htmlhint.io/">Roadmap</a> • <a href="https://htmlhint.io">Website</a>
+</p>
+
+## Usage
 If you want to change the default rules place a `.htmlhintrc` and/or `.xmlhintrc` file at the project root.  
 Check the default ruleset [here](https://github.com/yaniswang/HTMLHint/wiki/Usage).
 
 Global default options are available under "Debug > Open Preferences File" by adding or modifying "htmlhint.options" and "xmlhint.options".
 It also uses "jshint.options" and "csslint.options" for script and style tags.
 
-Issues/Updates
-=====
-[02/04/2017] Fixes a cursor placement issue
-[01/03/2017] Updated htmlhint - by @mornir
-[01/16/2016] Big update by Peter Scheler to support passing
-csslint/jshint options along to htmlhint. This means code
-inside <style>/<script> blocks can be validated.
-[02/17/2015] json format htmlhintrc, xmlhintrc: credit Hirse
-[02/13/2015] Added support for XML code inspection  
-[09/09/2014] more changes to .htmlhintrc logic  
-[09/09/2014] Added support for .htmlhintrc  
-[11/01/2013] Initial release.
+## Licence
 
+Project initially created by [@cfjedimaster](https://github.com/cfjedimaster) and transferred to the [HTMLHint](https://github.com/htmlhint) organization.
 
-Credit
-=====
-Built with [HTMLHint](http://htmlhint.com/).
+[MIT License](./LICENSE)
