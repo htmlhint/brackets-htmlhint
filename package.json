@@ -1,17 +1,16 @@
 {
-    "name": "camden.htmlhint",
-    "title": "HTMLHint",
+    "name": "brackets-htmlhint",
     "description": "Adds HTMLHint support to Brackets.",
-    "homepage": "https://github.com/cfjedimaster/brackets-htmlhint",
+    "homepage": "https://github.com/htmlhint/brackets-htmlhint",
     "version": "1.2.4",
-    "author": "Raymond Camden <raymondcamden@gmail.com> (http://www.raymondcamden.com)",
-    "contributors": [
-        "Diogo Gomes <dgomes@graphnode.com>",
-        "Jan Pilzer (https://github.com/Hirse)"
-    ],
     "license": "MIT",
-    "keywords": ["lint", "linting", "linter", "html", "xml"],
-    "categories": "linting",
+    "keywords": [
+        "lint",
+        "linting",
+        "linter",
+        "html",
+        "xml"
+    ],
     "engines": {
         "brackets": ">=0.33.0"
     }
