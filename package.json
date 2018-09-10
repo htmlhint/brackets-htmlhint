@@ -2,7 +2,7 @@
     "name": "brackets-htmlhint",
     "description": "Adds HTMLHint support to Brackets.",
     "homepage": "https://github.com/htmlhint/brackets-htmlhint",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "license": "MIT",
     "keywords": [
         "lint",
