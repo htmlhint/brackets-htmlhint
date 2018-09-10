@@ -30,6 +30,9 @@
 </p>
 
 ## Usage
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/htmlhint/brackets-htmlhint.svg)](https://greenkeeper.io/)
+
 If you want to change the default rules place a `.htmlhintrc` and/or `.xmlhintrc` file at the project root.
 Check the default ruleset [here](https://github.com/yaniswang/HTMLHint/wiki/Usage).
 
