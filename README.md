@@ -6,6 +6,8 @@
 
 <h4 align="center">A Brackets wrapper for HTMLHint</h4>
 
+<h2 align="center">🚨 THIS PROJECT IS DEPRECATED 🚨</h2>
+
 <p align="center">
   <a href="https://travis-ci.org/htmlhint/brackets-htmlhint">
     <img src="https://img.shields.io/travis/htmlhint/brackets-htmlhint.svg" alt="Travis Build Status">
